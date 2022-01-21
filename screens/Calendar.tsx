@@ -1,9 +1,9 @@
 import React  from 'react';
 import { View, StyleSheet, Button, Dimensions, Text, TouchableOpacity, ScrollView } from 'react-native';
 
-import { text } from './styles/text';
-import { container } from './styles/container';
-import { card } from './styles/header';
+import { text } from '../styles/text';
+import { container } from '../styles/container';
+import { card } from '../styles/header';
 
 
 export default function CalendarScreen() {
@@ -181,6 +181,21 @@ export default function CalendarScreen() {
               </Text>
             </View>
           </View>
+
+          <View style={[ scheduleApp.layout ]}>
+            <Text style={[ text.extraSmall, scheduleApp.hour ]}>
+              8:00
+            </Text>
+
+            <View style={[ scheduleApp.card ]}>
+              <Text style={[ text.largeBold ]}>
+                halloooo
+              </Text>
+              <Text style={[ text.extraSmall ]}>
+                Doeidoeidoeidoei
+              </Text>
+            </View>
+          </View>
         </ScrollView>
       </View>
 
@@ -243,7 +258,7 @@ const styles = StyleSheet.create({
 const scheduleApp = StyleSheet.create({
    background: {
     width: (Dimensions.get('screen').width - 24),
-    height: (Dimensions.get('screen').height + (6 * 16)) / 2,
+    height: (Dimensions.get('screen').height + (8 * 16)) / 2,
     // height: '65%',
 
     marginLeft: 16,
@@ -290,6 +305,6 @@ const micButton = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    bottom: 36,
+    bottom: 24,
   },
 })

@@ -14,6 +14,8 @@ target 'Mica' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'react-native-voice', :path => '../node_modules/@react-native-voice/voice'
+
   target 'MicaTests' do
     inherit! :complete
     # Pods for testing
