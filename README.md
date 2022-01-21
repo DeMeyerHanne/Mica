@@ -7,14 +7,15 @@ You can easily do this if you follow the steps via [this link](https://reactnati
 ## Set up this project
 1. Clone this repository
 ```
-git remote add origin 
+git remote add origin https://github.com/DeMeyerHanne/Mica.git
 ```
 
 3. Install npm packages (npm install)
 ```
-git status
-git add
-git commit
+npm install
 ```
 
-5. Run the app (npx react-native run-android)
+4. Run the app. I need to run it with npx, but you can run it without npx.
+```
+npx react-native run android
+```
