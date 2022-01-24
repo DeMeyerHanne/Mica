@@ -4,15 +4,14 @@ import { Dimensions, StyleSheet } from 'react-native';
 export const card = StyleSheet.create({
   background: {
     width: (Dimensions.get('screen').width - 24),
-    height: 175,
 
-    marginLeft: 16,
-    marginRight: 16,
     marginTop: 16,
-    marginBottom: 20,
+    marginBottom: 10,
 
     backgroundColor: '#fff',
-    borderRadius: 15,
+
+    alignItems: 'center',
+    flex: 1,
   },
   
   year: {

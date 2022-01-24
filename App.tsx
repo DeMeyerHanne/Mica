@@ -1,121 +1,120 @@
-import React, {useState, useEffect} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Voice from '@react-native-voice/voice';
+import React from 'react';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import Day from './components/Day';
+import Header from './components/Header';
+import Mic from './components/Mic';
+import { container } from './styles/container';
 
-export default function VoiceApp(Props: any, State: any) {
-  const [result, setResult] = useState('');
-
-  useEffect(() => {
-    Voice.onSpeechStart = onSpeechStartHandler;
-    Voice.onSpeechEnd = onSpeechEndHandler;
-    Voice.onSpeechResults = onSpeechResultsHandler;
-
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
-
-  const onSpeechStartHandler = (e: any) => {
-    console.log('Start handler --> ', e);
-  };
-
-  const onSpeechEndHandler = (e: any) => {
-    console.log('Stop handler --> ', e);
-  };
-
-  const onSpeechResultsHandler = (e: any) => {
-    const text = e.value[0]
-    setResult(text)
-    console.log('Ingesproken tekst: ', text)
-    console.log('Speeck result handler', e);
-  };
-
-  const startRecording = async () => {
-    try {
-      await Voice.start('nl-Be');
-    } catch (error) {
-      console.log('Error: ', error);
-    }
-  };
-
-  const stopRecording = async () => {
-    try {
-      await Voice.stop();
-      setResult('')
-    } catch (error) {
-      console.log('Error: ', error);
-    }
-  };
-
+export default function App () {
   return (
-    <View style={[styles.container]}>
-      <View>
-        <Text style={[styles.headerText]}>Speech recognition</Text>
-        <View style={[styles.textInputStyle]}>
-          <TextInput
-            value={result}
-            placeholder="your text"
-            style={{flex: 1}}
-            onChangeText={text => setResult(text)}
-          />
-          <TouchableOpacity onPress={startRecording}>
-            <Image
-              source={{
-                uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
-              }}
-              style={{width: 24, height: 24}}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={{
-            alignSelf: 'center',
-            marginTop: 24,
-            backgroundColor: 'red',
-            padding: 8,
-            borderRadius: 4,
-          }}
-          onPress={stopRecording}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>Stop</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={[ container.container ]}>
+      <LinearGradient
+        // Linear Gradient
+        colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
+        style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
+      />
+      <Header />
+      <Day />
+      <Mic />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
+  button: {
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+
+  text: {
+    backgroundColor: 'transparent',
+    fontSize: 15,
+    color: '#fff',
+  },
+
   container: {
     flex: 1,
-    padding: 24,
-  },
-
-  headerText: {
-    alignSelf: 'center',
-    marginVertical: 26,
-    fontWeight: 'bold',
-    fontSize: 26,
-    color: 'black',
-  },
-
-  textInputStyle: {
-    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 48,
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    backgroundColor: 'white',
-    shadowOffset: {width: 0, height: 1},
-    shadowRadius: 2,
-    elevation: 2,
-    shadowOpacity: 0.4,
+    justifyContent: 'center',
+  },
+
+  selectedDate: {
+    backgroundColor: '#3F3D56',
+    color: '#FFF',
+    
+    width: 36,
+    height: 36,
+
+    borderRadius: 50,
+
+    fontSize: 20,
+    fontWeight: 'normal',
+
+    textAlign: 'center',
+    textAlignVertical: 'center'
+  },
+
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 300,
   },
 });
+
+const scheduleApp = StyleSheet.create({
+   background: {
+    width: (Dimensions.get('screen').width - 24),
+    height: (Dimensions.get('screen').height + (8 * 16)) / 2,
+    // height: '65%',
+
+    marginLeft: 16,
+    marginRight: 16,
+
+    backgroundColor: '#FFFFFF99',
+
+    borderColor: '#FFFFFF40',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 15,
+  },
+
+  day: {
+    marginBottom: 24,
+    marginLeft: 12,
+    marginTop: 8,       
+  },
+
+  hour: {
+    
+  },
+
+  card: {
+    width: (Dimensions.get('screen').width - 100),
+    height: 88,
+    padding: 8,
+    marginBottom: 16,
+
+    backgroundColor: '#D4E5FA',
+
+    borderRadius: 15,
+  },
+
+  layout: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+});
+
+const micButton = StyleSheet.create({
+  button: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    bottom: 24,
+  },
+})
