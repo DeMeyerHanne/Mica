@@ -17,5 +17,7 @@ npm install
 
 4. Run the app. I need to run it with npx, but you can run it without npx.
 ```
-npx react-native run android
+npx react-native run-android
 ```
+Or this command if you use an IoS device.
+npx react-native run-ios
