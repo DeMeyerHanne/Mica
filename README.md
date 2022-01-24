@@ -20,4 +20,6 @@ npm install
 npx react-native run-android
 ```
 Or this command if you use an IoS device.
+```
 npx react-native run-ios
+```
