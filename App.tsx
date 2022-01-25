@@ -1,12 +1,15 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
 import Day from './components/Day';
 import Header from './components/Header';
 import Mic from './components/Mic';
+
 import { container } from './styles/container';
 
-export default function App () {
+
+const Overview = () => {
   return (
     <View style={[ container.container ]}>
       <LinearGradient
@@ -20,6 +23,8 @@ export default function App () {
     </View>
   )
 }
+
+export default Overview;
 
 const styles = StyleSheet.create({
   button: {

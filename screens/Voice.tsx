@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
 
-export default function VoiceApp(Props: any, State: any) {
+const VoiceApp = ({ navigation }: any, Props: any, State: any) => {
   const [result, setResult] = useState('');
 
   useEffect(() => {
@@ -123,3 +123,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
   },
 });
+
+export default VoiceApp;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { text } from '../styles/text';
 
-export default function Day () {
+const Header = () => {
   return (
     <View style={[ scheduleApp.background ]}>
       <Text style={[ text.largeBold, scheduleApp.day ]}>
@@ -114,11 +114,12 @@ export default function Day () {
             </Text>
           </View>
         </View>
-    </ScrollView>
+      </ScrollView>
     </View>
   )
-}
+};
 
+export default Header;
 
 
 const styles = StyleSheet.create({

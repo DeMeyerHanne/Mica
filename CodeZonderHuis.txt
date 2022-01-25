@@ -250,3 +250,41 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
   },
 });
+
+
+
+
+app.tsx
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+
+import AppStack from "./screens";
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AppStack></AppStack>
+    </NavigationContainer>
+    
+  );
+}
+
+
+index.tsx
+import React from 'react';
+import { createStackNavigator } from "@react-navigation/stack";
+import Overview from "./Calendar";
+import VoiceApp from "./Voice";
+
+const Stack = createStackNavigator();
+
+const AppStack = () => {
+  return (
+    <Stack.Navigator>
+        <Stack.Screen name='Overview' component={Overview}></Stack.Screen>
+        <Stack.Screen name='VoiceApp' component={VoiceApp}></Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
+export default AppStack;

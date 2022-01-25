@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function Mic () {
+const Mic = ({ navigation }: any) => {
   return (
     <View>
         <TouchableOpacity 
-          onPress={() => console.log('hallo')}
+          onPress={() => {navigation.navigate('VoiceApp');}}
           style={[ micButton.button ]}
         >
           {/* <Ionicons name="mic" size={28} /> */}
@@ -14,6 +14,8 @@ export default function Mic () {
       </View>
   )
 }
+
+export default Mic;
 
 const micButton = StyleSheet.create({
   button: {
