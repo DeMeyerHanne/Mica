@@ -12,10 +12,10 @@ import { container } from '../styles/container';
 const Overview = () => {
   return (
     <View style={[ container.container ]}>
-      {/* <LinearGradient
+      <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
-      /> */}
+      />
       <Header />
       <Day />
       <Mic />
