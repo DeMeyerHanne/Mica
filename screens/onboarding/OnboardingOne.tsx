@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { text } from './styles/text';
+import { text } from '../../styles/text';
 
 const OnboardingScreenOne = () => {
   return (
@@ -13,24 +13,24 @@ const OnboardingScreenOne = () => {
 
       <View style={[ card.background ]}>
         <Image 
-          source={require('./assets/onboarding/Onboarding3.png')}
+          source={require('./assets/onboarding/Onboarding1.png')}
         />
       </View>
 
       <View style={{ alignItems: 'center', marginBottom: 48 }}>
         <Text style={[ text.largeBold ]}>
-          Overloop je dag
+          Hey Mica
         </Text>
         <Text style={[ text.smallBlack, { textAlign: 'center', lineHeight: 20 }]}>
-          Mica kan je dag overlopen. Wil je weten wat je morgen moet doen? Vraag het dan met een specifieke datum erbij.
+          Mica is jouw persoonlijke agenda assistent. Begin je vraag altijd met Hey Mica en hij zal je verder helpen.
         </Text>
       </View>
 
 
       <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 56, }]}>
-        <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
-        <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#3F3D56' } ]}></View>
+        <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
+        <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
       </View>
 
 
