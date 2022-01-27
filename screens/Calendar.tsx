@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Day from '../components/Day';
@@ -25,7 +25,11 @@ const Overview = ({navigation}: any) => {
         style={[ micButton.button ]}
       >
         {/* <Ionicons name="mic" size={28} /> */}
-        <Text style={{ backgroundColor: '#3F3D56', color: '#FFF', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}>Mic</Text>
+        <Text 
+          style={{ fontSize: 36, backgroundColor: '#3F3D56', color: '#000', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}
+        >
+          +
+        </Text>
       </TouchableOpacity>
     </View>
     </View>
@@ -124,10 +128,10 @@ const scheduleApp = StyleSheet.create({
 
 const micButton = StyleSheet.create({
   button: {
-    position: 'relative',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // position: 'relative',
+    // alignItems: 'center',
+    // justifyContent: 'flex-end',
 
-    bottom: 24,
+    bottom: 40,
   },
 })

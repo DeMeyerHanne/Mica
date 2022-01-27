@@ -180,7 +180,7 @@ export default class ExpandableCalendarScreen extends Component<Props> {
 
   render() {
     return (
-      <View style={[ card.background, { borderRadius: 15, } ]}>
+      <View style={[ card.background, { borderRadius: 15, marginBottom: 32,} ]}>
         <CalendarProvider
           date={ITEMS[0].title}
           onDateChanged={this.onDateChanged}

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+  Dimensions,
   Image,
   StyleSheet,
   Text,
@@ -12,6 +13,8 @@ import Voice from '@react-native-voice/voice';
 
 import Tts from 'react-native-tts';
 import { text } from '../styles/text';
+import LinearGradient from 'react-native-linear-gradient';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const VoiceApp = (Props: any, State: any) => {
@@ -77,14 +80,19 @@ const VoiceApp = (Props: any, State: any) => {
 
   return (
     <View style={[ styles.container ]}>
+      <LinearGradient
+        colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
+        style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
+      />
       <TouchableOpacity
         onPress={() => console.log('Terug')}
       >
         <Text>Terug</Text>
       </TouchableOpacity>
 
-      <View>
-        <Text style={[ styles.headerText ]}>Hey Mica</Text>
+      <Text style={[ styles.headerText ]}>Hey Mica</Text>
+
+      <ScrollView style={[ styles.card ]}>
         <View style={[ styles.textInputStyle ]}>
           <TextInput
             value={result}
@@ -99,7 +107,7 @@ const VoiceApp = (Props: any, State: any) => {
         >
           Hier komt mica zen tekst
         </Text>     
-      </View>
+      </ScrollView>
 
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <TouchableOpacity 
@@ -157,7 +165,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#D4E5FA',
 
     marginLeft: 24,
-    marginRight: 8,
     marginBottom: 16,
   },
 
@@ -172,9 +179,36 @@ const styles = StyleSheet.create({
 
     backgroundColor: '#C9E5F1',
 
-    marginLeft: 8,
     marginRight: 24,
     marginBottom: 16,
+  },
+
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 300,
+  },
+
+  card: {
+    width: (Dimensions.get('screen').width - 24),
+    height: (Dimensions.get('screen').height + (12 * 16)) / 2,
+
+    marginLeft: 16,
+    marginRight: 16,
+
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
+
+    backgroundColor: '#FFFFFF99',
+
+    borderColor: '#FFFFFF40',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    borderRadius: 15,
   }
 });
 
