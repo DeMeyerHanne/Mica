@@ -3,7 +3,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import LinearGradient from 'react-native-linear-gradient';
 import { text } from '../../styles/text';
 
-const OnboardingScreenTwo = () => {
+const OnboardingScreenThree = () => {
   return (
     <View>
       {/* <LinearGradient
@@ -13,24 +13,24 @@ const OnboardingScreenTwo = () => {
 
       <View style={[ card.background ]}>
         <Image 
-          source={require('../../assets/onboarding/Onboarding2.png')}
+          source={require('../../assets/onboarding/Onboarding3.png')}
         />
       </View>
 
       <View style={{ alignItems: 'center', marginBottom: 48 }}>
         <Text style={[ text.largeBold ]}>
-          Voeg een afspraak toe
+          Overloop je dag
         </Text>
         <Text style={[ text.smallBlack, { textAlign: 'center', lineHeight: 20 }]}>
-          Mica helpt je bij het toevoegen van een nieuwe afspraak. Je hoeft het alleen maar te vragen en hij zal het inplannen.
+          Mica kan je dag overlopen. Wil je weten wat je morgen moet doen? Vraag het dan met een specifieke datum erbij.
         </Text>
       </View>
 
 
       <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 56, }]}>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
-        <View style={[ steps.dot, { backgroundColor: '#3F3D56' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
+        <View style={[ steps.dot, { backgroundColor: '#3F3D56' } ]}></View>
       </View>
 
 
@@ -88,4 +88,4 @@ const steps = StyleSheet.create({
     marginRight: 2,
   }
 })
-export default OnboardingScreenTwo;
+export default OnboardingScreenThree;

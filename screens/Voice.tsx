@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
 
-const VoiceApp = ({ navigation }: any, Props: any, State: any) => {
+const VoiceApp = (Props: any, State: any) => {
   const [result, setResult] = useState('');
 
   useEffect(() => {

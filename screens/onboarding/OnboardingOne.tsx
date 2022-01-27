@@ -6,14 +6,14 @@ import { text } from '../../styles/text';
 const OnboardingScreenOne = () => {
   return (
     <View>
-      <LinearGradient
+      {/* <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background , { width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }]}
-      />
+      /> */}
 
       <View style={[ card.background ]}>
         <Image 
-          source={require('./assets/onboarding/Onboarding1.png')}
+          source={require('../../assets/onboarding/Onboarding1.png')}
         />
       </View>
 
