@@ -17,7 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-const VoiceApp = (Props: any, State: any) => {
+const VoiceApp = ( Props: any, State: any ) => {
   const [result, setResult] = useState('');
 
   // STT
@@ -84,13 +84,21 @@ const VoiceApp = (Props: any, State: any) => {
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
       />
-      <TouchableOpacity
-        onPress={() => console.log('Terug')}
+      
+      <View 
+        style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
-        <Text>Terug</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={ () => {console.log('Back button pressed.')}}
+          style={{ marginTop: 8, marginLeft: 16 }}
+        >
+          <Image source={require('../assets/icons/Left.png')}/>
+        </TouchableOpacity>
 
-      <Text style={[ styles.headerText ]}>Hey Mica</Text>
+        <Text style={[ styles.headerText, { paddingRight: 24, } ]}>Hey Mica</Text>
+
+        <View></View>
+      </View>
 
       <ScrollView style={[ styles.card ]}>
         <View style={[ styles.textInputStyle ]}>
@@ -109,7 +117,7 @@ const VoiceApp = (Props: any, State: any) => {
         </Text>     
       </ScrollView>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center', bottom: 36, }}>
         <TouchableOpacity 
           onPress={startRecording}
           style={{ marginLeft: 4, marginRight: 4 }}
@@ -147,10 +155,12 @@ const styles = StyleSheet.create({
 
   headerText: {
     alignSelf: 'center',
-    marginVertical: 26,
     fontWeight: 'bold',
     fontSize: 26,
     color: 'black',
+
+    marginTop: 16,
+    marginBottom: 20
   },
 
   textInputStyle: {

@@ -26,7 +26,7 @@ const Overview = ({navigation}: any) => {
       >
         {/* <Ionicons name="mic" size={28} /> */}
         <Text 
-          style={{ fontSize: 36, backgroundColor: '#3F3D56', color: '#000', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}
+          style={{ fontSize: 38, backgroundColor: '#3F3D56', color: '#FFF', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}
         >
           +
         </Text>
