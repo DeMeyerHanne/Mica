@@ -40,7 +40,7 @@ const OnboardingScreenThree = ({navigation}: any) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('Calendar')}
+          onPress={() => navigation.push('Calendar')}
         >
           <Text>Klaar</Text>
         </TouchableOpacity>

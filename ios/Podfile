@@ -16,6 +16,8 @@ target 'Mica' do
 
   pod 'react-native-voice', :path => '../node_modules/@react-native-voice/voice'
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'MicaTests' do
     inherit! :complete
     # Pods for testing

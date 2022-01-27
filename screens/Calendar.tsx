@@ -1,24 +1,33 @@
 import React from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Day from '../components/Day';
 import Header from '../components/Header';
-import Mic from '../components/Mic';
 
 import { container } from '../styles/container';
 
 
-const Overview = () => {
+const Overview = ({navigation}: any) => {
   return (
     <View style={[ container.container ]}>
       <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
       />
+
       <Header />
       <Day />
-      <Mic />
+
+      <View>
+      <TouchableOpacity 
+        onPress={() => {navigation.navigate('Voice');}}
+        style={[ micButton.button ]}
+      >
+        {/* <Ionicons name="mic" size={28} /> */}
+        <Text style={{ backgroundColor: '#3F3D56', color: '#FFF', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}>Mic</Text>
+      </TouchableOpacity>
+    </View>
     </View>
   )
 }

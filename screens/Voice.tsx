@@ -7,11 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
 import Voice from '@react-native-voice/voice';
+
+import Tts from 'react-native-tts';
+import { text } from '../styles/text';
+
 
 const VoiceApp = (Props: any, State: any) => {
   const [result, setResult] = useState('');
 
+  // STT
   useEffect(() => {
     Voice.onSpeechStart = onSpeechStartHandler;
     Voice.onSpeechEnd = onSpeechEndHandler;
@@ -34,10 +40,15 @@ const VoiceApp = (Props: any, State: any) => {
     const text = e.value[0]
     setResult(text)
     console.log('Ingesproken tekst: ', text)
-
-
-
-    // console.log('Speeck result handler', e); //keert een {} met [] items terug.
+    if (text == 'voeg een nieuwe afspraak toe') {
+      handleVoice('Hoelaat')
+    } else if (text == 'om 12 uur') {
+      handleVoice('Wat wil je plannen')
+    } else if (text == 'brunch met Britt') {
+      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda')
+    } else {
+      handleVoice('Sorry, dat heb ik niet begrepen.')
+    }
   };
 
   const startRecording = async () => {
@@ -58,36 +69,61 @@ const VoiceApp = (Props: any, State: any) => {
     }
   };
 
+  // TTS
+  const handleVoice = (ttsText: any) => {
+    Tts.speak(ttsText)
+  }
+
+
   return (
-    <View style={[styles.container]}>
+    <View style={[ styles.container ]}>
+      <TouchableOpacity
+        onPress={() => console.log('Terug')}
+      >
+        <Text>Terug</Text>
+      </TouchableOpacity>
+
       <View>
-        <Text style={[styles.headerText]}>Speech recognition</Text>
-        <View style={[styles.textInputStyle]}>
+        <Text style={[ styles.headerText ]}>Hey Mica</Text>
+        <View style={[ styles.textInputStyle ]}>
           <TextInput
             value={result}
             placeholder="your text"
-            style={{flex: 1}}
+            style={[ text.large, {paddingRight: 20} ]}
             onChangeText={text => setResult(text)}
           />
-          <TouchableOpacity onPress={startRecording}>
-            <Image
-              source={{
-                uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
-              }}
-              style={{width: 24, height: 24}}
-            />
-          </TouchableOpacity>
         </View>
+
+        <Text 
+          style={[ styles.micaInputStyle, text.large, { paddingLeft: 20, textAlignVertical: 'center' } ]}
+        >
+          Hier komt mica zen tekst
+        </Text>     
+      </View>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <TouchableOpacity 
+          onPress={startRecording}
+          style={{ marginLeft: 4, marginRight: 4 }}
+        >
+          <Text 
+            style={{ backgroundColor: '#3F3D56', color: '#FFF', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}
+          >
+            Mic
+          </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={{
             alignSelf: 'center',
-            marginTop: 24,
             backgroundColor: 'red',
             padding: 8,
             borderRadius: 4,
+
+            marginLeft: 4, 
+            marginRight: 4,
           }}
-          onPress={stopRecording}>
+          onPress={(stopRecording)}>
           <Text style={{color: 'white', fontWeight: 'bold'}}>Stop</Text>
         </TouchableOpacity>
       </View>
@@ -98,7 +134,7 @@ const VoiceApp = (Props: any, State: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    
   },
 
   headerText: {
@@ -112,16 +148,35 @@ const styles = StyleSheet.create({
   textInputStyle: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
+
     height: 48,
+
     borderRadius: 20,
-    paddingHorizontal: 16,
-    backgroundColor: 'white',
-    shadowOffset: {width: 0, height: 1},
-    shadowRadius: 2,
-    elevation: 2,
-    shadowOpacity: 0.4,
+
+    backgroundColor: '#D4E5FA',
+
+    marginLeft: 24,
+    marginRight: 8,
+    marginBottom: 16,
   },
+
+  micaInputStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
+    height: 48,
+
+    borderRadius: 20,
+
+    backgroundColor: '#C9E5F1',
+
+    marginLeft: 8,
+    marginRight: 24,
+    marginBottom: 16,
+  }
 });
+
 
 export default VoiceApp;

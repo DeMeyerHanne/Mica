@@ -15,11 +15,11 @@ const AppStack = () => {
       screenOptions={{
       headerShown: false
     }}>
-      <Stack.Screen name='OnboardingOne' component={OnboardingScreenOne}></Stack.Screen>
+      {/* <Stack.Screen name='OnboardingOne' component={OnboardingScreenOne}></Stack.Screen>
       <Stack.Screen name='OnboardingTwo' component={OnboardingScreenTwo}></Stack.Screen>
-      <Stack.Screen name='OnboardingThree' component={OnboardingScreenThree}></Stack.Screen>
+      <Stack.Screen name='OnboardingThree' component={OnboardingScreenThree}></Stack.Screen> */}
+      {/* <Stack.Screen name='Overview' component={Overview}></Stack.Screen> */}
       <Stack.Screen name='Voice' component={VoiceApp}></Stack.Screen>
-      <Stack.Screen name='Overview' component={Overview}></Stack.Screen>
     </Stack.Navigator>
   )
 };
