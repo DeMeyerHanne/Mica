@@ -3,7 +3,7 @@ import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import LinearGradient from 'react-native-linear-gradient';
 import { text } from '../../styles/text';
 
-const OnboardingScreenTwo = () => {
+const OnboardingScreenTwo = ({navigation}: any) => {
   return (
     <View>
       <LinearGradient
@@ -39,7 +39,9 @@ const OnboardingScreenTwo = () => {
           <Text>Skip</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('OnboardingThree')}
+        >
           <Text>Volgende</Text>
         </TouchableOpacity>
       </View>
