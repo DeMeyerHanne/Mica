@@ -15,6 +15,8 @@ import Tts from 'react-native-tts';
 import { text } from '../styles/text';
 import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
+import Appointment from '../models/appointment';
+// import { appointments } from '../utils/appointment';
 
 
 const VoiceApp = ( Props: any, State: any ) => {
@@ -78,6 +80,26 @@ const VoiceApp = ( Props: any, State: any ) => {
   }
 
 
+  // DB
+  // const [newAppointment, setNewAppointment ] = useState<Appointment>({
+  //   title: '',
+  //   hour: '',
+  //   date: '',
+  // });
+
+  // const saveAppointment = async () => {
+  //   if (newAppointment.title && newAppointment.hour && newAppointment.date) {
+  //     const insert = await appointments.create(newAppointment);
+  //     console.log('This is the insert: ', insert);
+  //     if (insert.rowsAffected > 0) {
+  //       console.log('GELUKT ✅');
+  //     } else {
+  //       console.log('FAILED ❌')
+  //     }
+  //   }
+  // }
+
+
   return (
     <View style={[ styles.container ]}>
       <LinearGradient
@@ -89,7 +111,8 @@ const VoiceApp = ( Props: any, State: any ) => {
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <TouchableOpacity
-          onPress={ () => {console.log('Back button pressed.')}}
+          // onPress={ () => { saveAppointment(); }}
+
           style={{ marginTop: 8, marginLeft: 16 }}
         >
           <Image source={require('../assets/icons/Left.png')}/>
@@ -104,9 +127,51 @@ const VoiceApp = ( Props: any, State: any ) => {
         <View style={[ styles.textInputStyle ]}>
           <TextInput
             value={result}
-            placeholder="your text"
+            placeholder="title"
             style={[ text.large, {paddingRight: 20} ]}
-            onChangeText={text => setResult(text)}
+            // onChangeText={text => setResult(text)}
+            // onChangeText={
+            //   (text: string) => {
+            //     setNewAppointment((oldAppointment: Appointment) => {
+            //       oldAppointment.title = text;
+            //       return { ...oldAppointment }
+            //     })
+            //   }
+            // }
+          />
+        </View>
+
+        <View style={[ styles.textInputStyle ]}>
+          <TextInput
+            value={result}
+            placeholder="hour"
+            style={[ text.large, {paddingRight: 20} ]}
+            // onChangeText={text => setResult(text)}
+            // onChangeText={
+            //   (text: string) => {
+            //     setNewAppointment((oldAppointment: Appointment) => {
+            //       oldAppointment.hour = text;
+            //       return { ...oldAppointment }
+            //     })
+            //   }
+            // }
+          />
+        </View>
+
+        <View style={[ styles.textInputStyle ]}>
+          <TextInput
+            value={result}
+            placeholder="date"
+            style={[ text.large, {paddingRight: 20} ]}
+            // onChangeText={text => setResult(text)}
+            // onChangeText={
+            //   (text: string) => {
+            //     setNewAppointment((oldAppointment: Appointment) => {
+            //       oldAppointment.date = text;
+            //       return { ...oldAppointment }
+            //     })
+            //   }
+            // }
           />
         </View>
 

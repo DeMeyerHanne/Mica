@@ -4,14 +4,18 @@
 // SQLite.DEBUG(true);
 // SQLite.enablePromise(true);
 
-// const getDb = openDatabase(
-//   {
-//     name: 'appointments',
-//     location: 'default',
-//   },
-//   () => {},
-//   error => { console.error(error) }
-// );
+// // const getDb = openDatabase(
+// //   {
+// //     name: 'appointments',
+// //     location: 'default',
+// //   },
+// //   () => {},
+// //   error => { console.error(error) }
+// // );
+
+// export const getDb = async () => {
+//   return openDatabase({ name: 'mica.db', location: 'default' });
+// };
 
 // const transaction = (db: SQLiteDatabase ): Promise<Transaction> => {
 //   return new Promise(function (resolve, reject) {
@@ -46,7 +50,7 @@
 // };
 
 // export const initAppointments = async () => {
-//   const db = getDb();
+//   const db = await getDb();
 //   const tx = await transaction(db).catch(error => console.error(error));
 
 //   if (tx) {
@@ -61,7 +65,7 @@
 //   // Create (post)
 //   create: (a: Appointment): Promise<ResultSet> => {
 //     return new Promise(async function(resolve, reject) {
-//       const db = getDb(),
+//       const db = await getDb(),
 //         tx = await transaction(db);
 
 //       const res = await query(tx, {
@@ -77,4 +81,25 @@
 //   },
 
 //   // Read (get)
+//   read: {
+//     all: (): Promise<ResultSet> => {
+//       return new Promise(async function(resolve, reject) {
+//         const db = await getDb();
+//         const tx = await transaction(db);
+
+//         const res = await query(tx, {
+//           sql: "SELECT * FROM `appointments`",
+//           args: []
+//         }).catch((error) => {
+//           reject(error);
+//           console.error('Catch error: ', error);
+//         });
+
+//         if (res) {
+//           resolve(res);
+//           console.log('Res resolved');
+//         }
+//       })
+//     }
+//   }
 // }
