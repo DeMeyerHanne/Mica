@@ -1,56 +1,20 @@
-import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useCallback } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { ResultSetRowList } from 'react-native-sqlite-storage';
 
 import Day from '../components/Day';
 import Header from '../components/Header';
-import Appointment from '../models/appointment';
 
 import { container } from '../styles/container';
-// import { appointments } from '../utils/appointment';
 
 
 const Overview = ({navigation}: any) => {
-  // const [ allAppointments, setAllAppointments ] = useState<Appointment[]>([]);
-
-  // const getAppointments = async () => {
-  //   const { rows }: { rows: ResultSetRowList } = await appointments.read.all();
-  //   console.log({ rows });
-  //   setAllAppointments(( rows as any )._array);
-  // }
-
-  // useFocusEffect (
-  //   useCallback (
-  //     () => {
-  //       getAppointments();
-  //     }, []
-  //   )
-  // );
-
-  // useEffect(() => {
-  //   console.log('Found appointments: ', { allAppointments });
-  // }, [allAppointments])
-
-
   return (
     <View style={[ container.container ]}>
       <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
       />
-
-      {/* { allAppointments.map((a: Appointment ) => (
-        <View>
-          <Text>title: {a.title }</Text>
-          <Text>hour: {a.hour }</Text>
-          <Text>date: {a.date }</Text>
-        </View>
-      ))} */}
 
       <Header />
       <Day />
@@ -163,10 +127,6 @@ const scheduleApp = StyleSheet.create({
 
 const micButton = StyleSheet.create({
   button: {
-    // position: 'relative',
-    // alignItems: 'center',
-    // justifyContent: 'flex-end',
-
     bottom: 40,
   },
 })

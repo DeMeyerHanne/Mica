@@ -1,25 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Animated, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import Voice from '@react-native-voice/voice';
-
 import Tts from 'react-native-tts';
-import { text } from '../styles/text';
 import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
-import Appointment from '../models/appointment';
-// import { appointments } from '../utils/appointment';
+
+import { text } from '../styles/text';
+
+import LottieView from 'lottie-react-native';
 
 
-const VoiceApp = ( Props: any, State: any ) => {
+
+const VoiceApp = ( {navigation}: any, Props: any, State: any ) => {
   const [result, setResult] = useState('');
 
   // STT
@@ -46,7 +39,7 @@ const VoiceApp = ( Props: any, State: any ) => {
     setResult(text)
     console.log('Ingesproken tekst: ', text)
     if (text == 'voeg een nieuwe afspraak toe') {
-      handleVoice('Hoelaat')
+      handleVoice('Om hoe laat')
     } else if (text == 'om 12 uur') {
       handleVoice('Wat wil je plannen')
     } else if (text == 'brunch met Britt') {
@@ -80,27 +73,9 @@ const VoiceApp = ( Props: any, State: any ) => {
   }
 
 
-  // DB
-  // const [newAppointment, setNewAppointment ] = useState<Appointment>({
-  //   title: '',
-  //   hour: '',
-  //   date: '',
-  // });
-
-  // const saveAppointment = async () => {
-  //   if (newAppointment.title && newAppointment.hour && newAppointment.date) {
-  //     const insert = await appointments.create(newAppointment);
-  //     console.log('This is the insert: ', insert);
-  //     if (insert.rowsAffected > 0) {
-  //       console.log('GELUKT ✅');
-  //     } else {
-  //       console.log('FAILED ❌')
-  //     }
-  //   }
-  // }
-
-
   return (
+
+    // <LottieView source={require('../animations/microphone.json')} autoPlay loop={true} />
     <View style={[ styles.container ]}>
       <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
@@ -111,8 +86,7 @@ const VoiceApp = ( Props: any, State: any ) => {
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <TouchableOpacity
-          // onPress={ () => { saveAppointment(); }}
-
+        onPress={ () => { navigation.navigate('Overview')}}
           style={{ marginTop: 8, marginLeft: 16 }}
         >
           <Image source={require('../assets/icons/Left.png')}/>
@@ -221,7 +195,7 @@ const styles = StyleSheet.create({
   headerText: {
     alignSelf: 'center',
     fontWeight: 'bold',
-    fontSize: 26,
+    fontSize: 24,
     color: 'black',
 
     marginTop: 16,
