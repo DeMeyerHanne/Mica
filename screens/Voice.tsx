@@ -6,14 +6,13 @@ import Tts from 'react-native-tts';
 import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { text } from '../styles/text';
 
-import LottieView from 'lottie-react-native';
-
+import Bubble from '../components/MessageBubble';
 
 
-const VoiceApp = ( {navigation}: any, Props: any, State: any ) => {
+const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   const [result, setResult] = useState('');
+  const [answer, setAnswer] = useState('');
 
   // STT
   useEffect(() => {
@@ -39,13 +38,20 @@ const VoiceApp = ( {navigation}: any, Props: any, State: any ) => {
     setResult(text)
     console.log('Ingesproken tekst: ', text)
     if (text == 'voeg een nieuwe afspraak toe') {
+      handleVoice('Op welke datum?')
+      setAnswer('Op welke datum?')
+    } else if (text == '12 februari 2022') {
       handleVoice('Om hoe laat')
+      setAnswer('Om hoe laat?')
     } else if (text == 'om 12 uur') {
       handleVoice('Wat wil je plannen')
+      setAnswer('Wat wil je plannen?')
     } else if (text == 'brunch met Britt') {
       handleVoice('Oke, ik voeg deze afspraak toe aan je agenda')
+      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.')
     } else {
-      handleVoice('Sorry, dat heb ik niet begrepen.')
+      handleVoice('Sorry, dat heb ik niet verstaan.')
+      setAnswer('Sorry, dat heb ik niet verstaan.')
     }
   };
 
@@ -73,9 +79,7 @@ const VoiceApp = ( {navigation}: any, Props: any, State: any ) => {
   }
 
 
-  return (
-
-    // <LottieView source={require('../animations/microphone.json')} autoPlay loop={true} />
+  return (    
     <View style={[ styles.container ]}>
       <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
@@ -97,64 +101,18 @@ const VoiceApp = ( {navigation}: any, Props: any, State: any ) => {
         <View></View>
       </View>
 
+      
       <ScrollView style={[ styles.card ]}>
-        <View style={[ styles.textInputStyle ]}>
-          <TextInput
-            value={result}
-            placeholder="title"
-            style={[ text.large, {paddingRight: 20} ]}
-            // onChangeText={text => setResult(text)}
-            // onChangeText={
-            //   (text: string) => {
-            //     setNewAppointment((oldAppointment: Appointment) => {
-            //       oldAppointment.title = text;
-            //       return { ...oldAppointment }
-            //     })
-            //   }
-            // }
-          />
-        </View>
+        <Bubble 
+          mine
+          text={ result }
+        />
 
-        <View style={[ styles.textInputStyle ]}>
-          <TextInput
-            value={result}
-            placeholder="hour"
-            style={[ text.large, {paddingRight: 20} ]}
-            // onChangeText={text => setResult(text)}
-            // onChangeText={
-            //   (text: string) => {
-            //     setNewAppointment((oldAppointment: Appointment) => {
-            //       oldAppointment.hour = text;
-            //       return { ...oldAppointment }
-            //     })
-            //   }
-            // }
-          />
-        </View>
-
-        <View style={[ styles.textInputStyle ]}>
-          <TextInput
-            value={result}
-            placeholder="date"
-            style={[ text.large, {paddingRight: 20} ]}
-            // onChangeText={text => setResult(text)}
-            // onChangeText={
-            //   (text: string) => {
-            //     setNewAppointment((oldAppointment: Appointment) => {
-            //       oldAppointment.date = text;
-            //       return { ...oldAppointment }
-            //     })
-            //   }
-            // }
-          />
-        </View>
-
-        <Text 
-          style={[ styles.micaInputStyle, text.large, { paddingLeft: 20, textAlignVertical: 'center' } ]}
-        >
-          Hier komt mica zen tekst
-        </Text>     
-      </ScrollView>
+        <Bubble 
+          notMine
+          text={ answer }
+        />
+      </ScrollView> 
 
       <View style={{ flexDirection: 'row', justifyContent: 'center', bottom: 36, }}>
         <TouchableOpacity 

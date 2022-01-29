@@ -288,3 +288,42 @@ const AppStack = () => {
 }
 
 export default AppStack;
+
+
+
+
+
+
+
+
+
+scrollview in voice.tsx
+<View style={[ styles.textInputStyle ]}>
+          <TextInput
+            value={result}
+            placeholder="title"
+            style={[ text.large, {paddingRight: 20} ]}
+          />
+        </View>
+
+        <View style={[ styles.textInputStyle ]}>
+          <TextInput
+            value={result}
+            placeholder="hour"
+            style={[ text.large, {paddingRight: 20} ]}
+          />
+        </View>
+
+        <View style={[ styles.textInputStyle ]}>
+          <TextInput
+            value={result}
+            placeholder="date"
+            style={[ text.large, {paddingRight: 20} ]}
+          />
+        </View>
+
+        <Text 
+          style={[ styles.micaInputStyle, text.large, { paddingLeft: 20, textAlignVertical: 'center' } ]}
+        >
+          Hier komt mica zen tekst
+        </Text>  
