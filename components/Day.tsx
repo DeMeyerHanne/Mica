@@ -21,7 +21,7 @@ const Header = () => {
       await createTable(db);
 
       const storedAppointmentItems = await getAppointmentItems(db);
-      console.log('#### ', storedAppointmentItems);
+      console.log('Data in db: ', storedAppointmentItems);
 
       if (storedAppointmentItems.length ) {
         setAppointment(storedAppointmentItems);
