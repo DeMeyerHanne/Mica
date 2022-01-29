@@ -1,8 +1,44 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ResultSetRowList } from 'react-native-sqlite-storage';
+
+import Appointment from '../models/appointment';
+
 import { text } from '../styles/text';
+import { createTable, deleteTable, getAppointmentItems, getDBConnection, saveAppointmentItems } from '../utils/db';
+
 
 const Header = () => {
+  const [ appointment, setAppointment ] = useState<Appointment[]>([]);
+
+  const getAppointments = async () => {
+    try {
+      const initAppointments = [{id: 0, title: 'Naar de dokter', description: 'In Kortrijk', hour: '12:30', date:'29/01/2022'}, {id: 1, title: 'Etentje met vrienden', description: '', hour: '18:45', date:'29/01/2022'},]
+
+      const db = await getDBConnection();
+      await createTable(db);
+
+      const storedAppointmentItems = await getAppointmentItems(db);
+      console.log('#### ', storedAppointmentItems);
+
+      if (storedAppointmentItems.length ) {
+        setAppointment(storedAppointmentItems);
+      } else {
+        await saveAppointmentItems(db, initAppointments);
+        setAppointment(initAppointments);
+        console.log('savedddd')
+      }
+    } catch (error) {
+      console.log('Error --> ', error)
+    }
+  };
+
+  useEffect(()=>{
+    getAppointments();
+  },[])
+
   return (
     <View style={[ scheduleApp.background ]}>
       <Text style={[ text.largeBold, scheduleApp.day ]}>
@@ -10,81 +46,6 @@ const Header = () => {
       </Text>
 
       <ScrollView>
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
-
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
-
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
-
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
-
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
-
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
-      
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
-
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
-
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
-
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
-
         <View style={[ scheduleApp.layout ]}>
           <Text style={[ text.extraSmall, scheduleApp.hour ]}>
             8:00

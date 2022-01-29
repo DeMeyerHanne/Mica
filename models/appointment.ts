@@ -1,7 +1,7 @@
 export default interface Appointment {
-  id?: string;
+  id: number;
   title: string;
-  description?: string;
+  description: string;
   date: string;
   hour: string;
 }

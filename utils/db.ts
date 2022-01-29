@@ -1,48 +1,57 @@
-import { enablePromise, openDatabase, SQLiteDatabase } from 'react-native-sqlite-storage';
-import { ToDoItem } from '../models';
+import { deleteDatabase, enablePromise, openDatabase, SQLiteDatabase } from 'react-native-sqlite-storage';
+import Appointment from '../models/appointment';
 
-const tableName = 'todoData';
 
+
+const tableName = 'AppointmentData';
 enablePromise(true);
 
 export const getDBConnection = async () => {
-  return openDatabase({ name: 'todo-data.db', location: 'default' });
+  return openDatabase({ name: 'appoinment-data.db', location: 'default' });
 };
+
+// deleteDatabase(
+//   {name: 'appoinment-data.db', location: 'default'},  
+//   () => { console.log('second db deleted');  },
+//   error => {
+//       console.log("ERROR: " + error); 
+//   }
+// );
+
+
+
 
 export const createTable = async (db: SQLiteDatabase) => {
   // create table if not exists
-  const query = `CREATE TABLE IF NOT EXISTS ${tableName}(
-        value TEXT NOT NULL
-    );`;
-
+  const query = `CREATE TABLE IF NOT EXISTS ${tableName} (id integer primary key autoincrement, title text, description text, date text, hour text);`;
   await db.executeSql(query);
 };
 
-export const getTodoItems = async (db: SQLiteDatabase): Promise<ToDoItem[]> => {
+export const getAppointmentItems = async (db: SQLiteDatabase): Promise<Appointment[]> => {
   try {
-    const todoItems: ToDoItem[] = [];
-    const results = await db.executeSql(`SELECT rowid as id,value FROM ${tableName}`);
+    const appointmentItems: Appointment[] = [];
+    const results = await db.executeSql(`SELECT * FROM ${tableName}`);
     results.forEach(result => {
       for (let index = 0; index < result.rows.length; index++) {
-        todoItems.push(result.rows.item(index))
+        appointmentItems.push(result.rows.item(index))
       }
     });
-    return todoItems;
+    return appointmentItems;
   } catch (error) {
     console.error(error);
-    throw Error('Failed to get todoItems !!!');
+    throw Error('Failed to get appointmentItems!');
   }
 };
 
-export const saveTodoItems = async (db: SQLiteDatabase, todoItems: ToDoItem[]) => {
+export const saveAppointmentItems = async (db: SQLiteDatabase, appointmentItems: Appointment[]) => {
   const insertQuery =
-    `INSERT OR REPLACE INTO ${tableName}(rowid, value) values` +
-    todoItems.map(i => `(${i.id}, '${i.value}')`).join(',');
+    `INSERT OR REPLACE INTO ${tableName}(rowid, title, description, date, hour) values` +
+    appointmentItems.map(i => `(${i.id}, '${i.title}', '${i.description}', '${i.date}', '${i.hour}')`).join(',');
 
   return db.executeSql(insertQuery);
 };
 
-export const deleteTodoItem = async (db: SQLiteDatabase, id: number) => {
+export const deleteAppointmentItem = async (db: SQLiteDatabase, id: number) => {
   const deleteQuery = `DELETE from ${tableName} where rowid = ${id}`;
   await db.executeSql(deleteQuery);
 };
