@@ -62,15 +62,15 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
     setResult(text);
     console.log('Ingesproken tekst: ', text);
 
-    if (text == 'voeg een nieuwe afspraak toe') {
+    if (text == 'Hey Mica voeg een nieuwe afspraak toe' || text == 'Hey Mika voeg een nieuwe afspraak toe') {
       handleVoice('Op welke datum?');
       setAnswer('Op welke datum?');
     }
-    else if (text == 'plan een nieuwe afspraak') {
+    else if (text == 'Hey Mica plan een nieuwe afspraak' || text == 'Hey Mika plan een nieuwe afspraak') {
       handleVoice('Op welke datum?');
       setAnswer('Op welke datum?');
     }
-    else if (text == 'Ik wil een nieuwe afspraak inplannen') {
+    else if (text == 'Hey Mica Ik wil een nieuwe afspraak toevoegen aan mijn agenda' || text == 'Hey Mika Ik wil een nieuwe afspraak toevoegen aan mijn agenda') {
       handleVoice('Op welke datum?');
       setAnswer('Op welke datum?');
     }
@@ -109,8 +109,8 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
       postAppointment(appointment)
     } 
     else if (text == 'ja') {
-      handleVoice('Welke informatie wil je nog toevoegen?');
-      setAnswer('Welke informatie wil je nog toevoegen?');
+      handleVoice('Wat wil je er nog aan toevoegen?');
+      setAnswer('Wat wil je er nog aan toevoegen?');
     } else if (text == 'voor haar verjaardag') {
       setAppointment((oldAppointment: Appointment) => {
         oldAppointment.description = text;
