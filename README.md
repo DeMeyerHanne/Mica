@@ -1,7 +1,8 @@
 # Mica
+Mica is an application with a voice assistant. You can ask Mica to schedule a new appointment or what you have to do on a certain day.
 
 ## Device
-Use an emulator or use a real phone to test the app.
+Use an emulator or a real phone to test the application.
 You can easily do this if you follow the steps via [this link](https://reactnative.dev/docs/environment-setup). Make sure you select the right development OS and target OS to avoid problems.
 
 ## Set up this project
