@@ -128,5 +128,6 @@ const scheduleApp = StyleSheet.create({
 const micButton = StyleSheet.create({
   button: {
     bottom: 40,
+    left: 140
   },
 })

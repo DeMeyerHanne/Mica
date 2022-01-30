@@ -35,7 +35,7 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
       console.error('Error: ', error);
       throw Error(error);
     }
-  }
+  };
 
 
   // SPEECH TO TEXT
@@ -63,6 +63,14 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
     console.log('Ingesproken tekst: ', text);
 
     if (text == 'voeg een nieuwe afspraak toe') {
+      handleVoice('Op welke datum?');
+      setAnswer('Op welke datum?');
+    }
+    else if (text == 'plan een nieuwe afspraak') {
+      handleVoice('Op welke datum?');
+      setAnswer('Op welke datum?');
+    }
+    else if (text == 'Ik wil een nieuwe afspraak inplannen') {
       handleVoice('Op welke datum?');
       setAnswer('Op welke datum?');
     }
@@ -156,8 +164,7 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <TouchableOpacity
-          // onPress={ () => { navigation.navigate('Overview')}}
-          onPress={() => {console.log('Button: ', appointment.title)}} //********************************/
+          onPress={ () => { navigation.navigate('Overview')}}
           style={{ marginTop: 8, marginLeft: 16 }}
         >
           <Image source={require('../assets/icons/Left.png')}/>

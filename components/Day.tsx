@@ -56,7 +56,7 @@ const Header = () => {
             </Text>
 
             <View style={[ scheduleApp.card ]}>
-              <Text style={[ text.largeBold ]}>
+              <Text style={[ text.medium, { fontWeight: 'bold', marginBottom: 2 } ]}>
                 { a.title }
               </Text>
               <Text style={[ text.extraSmall ]}>
@@ -143,8 +143,8 @@ const scheduleApp = StyleSheet.create({
   },
 
   hour: {
-    
-  },
+
+  },  
 
   card: {
     width: (Dimensions.get('screen').width - 100),
