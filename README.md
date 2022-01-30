@@ -1,4 +1,5 @@
 # Mica
+Mica is an application with a voice assistant. You can ask Mica to schedule a new appointment or what you have to do on a certain day.
 
 ## Device
 Use an emulator or a real phone to test the application.
