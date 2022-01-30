@@ -12,7 +12,7 @@ import { createTable, deleteTable, getAppointmentItems, getDBConnection, saveApp
 
 const Header = () => {
   const [ appointment, setAppointment ] = useState<Appointment[]>([]);
-
+  
   const getAppointments = async () => {
     try {
       // const initAppointments = [{id: 0, title: 'Naar de dokter', description: 'In Kortrijk', hour: '12:30', date:'29/01/2022'}, {id: 1, title: 'Etentje met vrienden', description: '', hour: '18:45', date:'29/01/2022'},]
@@ -48,35 +48,24 @@ const Header = () => {
       </Text>
 
       <ScrollView>
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
+        {/* Loop */}
+        { appointment.map((a: Appointment) => (
+          <View style={[ scheduleApp.layout ]}>
+            <Text style={[ text.extraSmall, scheduleApp.hour ]}>
+              { a.hour }
+            </Text>
 
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
+            <View style={[ scheduleApp.card ]}>
+              <Text style={[ text.largeBold ]}>
+                { a.title }
+              </Text>
+              <Text style={[ text.extraSmall ]}>
+                { a.description }
+              </Text>
+            </View>
           </View>
-        </View>
-        
-        <View style={[ scheduleApp.layout ]}>
-          <Text style={[ text.extraSmall, scheduleApp.hour ]}>
-            8:00
-          </Text>
+        ))}
 
-          <View style={[ scheduleApp.card ]}>
-            <Text style={[ text.largeBold ]}>
-              halloooo
-            </Text>
-            <Text style={[ text.extraSmall ]}>
-              Doeidoeidoeidoei
-            </Text>
-          </View>
-        </View>
       </ScrollView>
     </View>
   )

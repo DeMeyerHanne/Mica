@@ -15,8 +15,6 @@ import Appointment from '../models/appointment';
 const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   const [result, setResult] = useState('');
   const [answer, setAnswer] = useState('');
-
-  // Afspraak toevoegen
   const [ appointment, setAppointment ] = useState<Appointment>({
     hour: '',
     title: '',
