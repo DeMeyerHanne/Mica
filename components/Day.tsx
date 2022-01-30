@@ -15,7 +15,7 @@ const Header = () => {
 
   const getAppointments = async () => {
     try {
-      const initAppointments = [{id: 0, title: 'Naar de dokter', description: 'In Kortrijk', hour: '12:30', date:'29/01/2022'}, {id: 1, title: 'Etentje met vrienden', description: '', hour: '18:45', date:'29/01/2022'},]
+      // const initAppointments = [{id: 0, title: 'Naar de dokter', description: 'In Kortrijk', hour: '12:30', date:'29/01/2022'}, {id: 1, title: 'Etentje met vrienden', description: '', hour: '18:45', date:'29/01/2022'},]
 
       const db = await getDBConnection();
       await createTable(db);
@@ -25,11 +25,13 @@ const Header = () => {
 
       if (storedAppointmentItems.length ) {
         setAppointment(storedAppointmentItems);
-      } else {
-        await saveAppointmentItems(db, initAppointments);
-        setAppointment(initAppointments);
-        console.log('savedddd')
+        console.log('Set appointment');
       }
+      //else {
+      //   await saveAppointmentItems(db, initAppointments);
+      //   setAppointment(initAppointments);
+      //   console.log('savedddd')
+      // }
     } catch (error) {
       console.log('Error --> ', error)
     }

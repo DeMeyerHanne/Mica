@@ -8,13 +8,39 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 import Bubble from '../components/MessageBubble';
+import { createTable, getDBConnection, saveAppointmentItems } from '../utils/db';
+import Appointment from '../models/appointment';
 
 
 const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   const [result, setResult] = useState('');
   const [answer, setAnswer] = useState('');
 
-  // STT
+  // Afspraak toevoegen
+  const [ appointment, setAppointment ] = useState<Appointment>({
+    hour: '',
+    title: '',
+    description: '',
+    date: ''
+  });
+
+
+  // DATABASE
+  const postAppointment = async (appointment: any) => {
+    try {
+      const db = await getDBConnection();
+      await createTable(db);
+
+      await saveAppointmentItems(db, appointment);
+      console.log('Saved: ', appointment);
+    } catch (error) {
+      console.error('Error: ', error);
+      throw Error(error);
+    }
+  }
+
+
+  // SPEECH TO TEXT
   useEffect(() => {
     Voice.onSpeechStart = onSpeechStartHandler;
     Voice.onSpeechEnd = onSpeechEndHandler;
@@ -34,22 +60,62 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   };
 
   const onSpeechResultsHandler = (e: any) => {
-    const text = e.value[0]
-    setResult(text)
-    console.log('Ingesproken tekst: ', text)
+    const text = e.value[0];
+    setResult(text);
+    console.log('Ingesproken tekst: ', text);
+
     if (text == 'voeg een nieuwe afspraak toe') {
-      handleVoice('Op welke datum?')
-      setAnswer('Op welke datum?')
-    } else if (text == '12 februari 2022') {
-      handleVoice('Om hoe laat')
-      setAnswer('Om hoe laat?')
-    } else if (text == 'om 12 uur') {
-      handleVoice('Wat wil je plannen')
-      setAnswer('Wat wil je plannen?')
-    } else if (text == 'brunch met Britt') {
-      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda')
-      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.')
-    } else {
+      handleVoice('Op welke datum?');
+      setAnswer('Op welke datum?');
+    }
+    else if (text == '12 februari 2022') {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.date = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Om hoe laat');
+      setAnswer('Om hoe laat?');
+    } 
+    else if (text == 'om 12 uur') {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.hour = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Wat wil je plannen');
+      setAnswer('Wat wil je plannen?');
+    } 
+    else if (text == 'brunch met Britt') {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.title = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Wil je extra informatie toevoegen?');
+      setAnswer('Wil je extra informatie toevoegen?');
+    } 
+    else if (text == 'nee') {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.description = '';
+        return { ...oldAppointment };
+      });
+      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
+      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+
+      postAppointment(appointment)
+    } 
+    else if (text == 'ja') {
+      handleVoice('Welke informatie wil je nog toevoegen?');
+      setAnswer('Welke informatie wil je nog toevoegen?');
+    } else if (text == 'voor haar verjaardag') {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.description = text;
+        return { ...oldAppointment }
+      });
+      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
+      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+
+      postAppointment(appointment)
+    } 
+    else {
       handleVoice('Sorry, dat heb ik niet verstaan.')
       setAnswer('Sorry, dat heb ik niet verstaan.')
     }
@@ -73,12 +139,14 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
     }
   };
 
-  // TTS
+
+  // TEXT TO SPEECH
   const handleVoice = (ttsText: any) => {
     Tts.speak(ttsText)
   }
 
 
+  // APPLICATIE
   return (    
     <View style={[ styles.container ]}>
       <LinearGradient
@@ -90,7 +158,8 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
         style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <TouchableOpacity
-        onPress={ () => { navigation.navigate('Overview')}}
+          // onPress={ () => { navigation.navigate('Overview')}}
+          onPress={() => {console.log('Button: ', appointment.title)}} //********************************/
           style={{ marginTop: 8, marginLeft: 16 }}
         >
           <Image source={require('../assets/icons/Left.png')}/>

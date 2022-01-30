@@ -18,9 +18,6 @@ export const getDBConnection = async () => {
 //   }
 // );
 
-
-
-
 export const createTable = async (db: SQLiteDatabase) => {
   // create table if not exists
   const query = `CREATE TABLE IF NOT EXISTS ${tableName} (id integer primary key autoincrement, title text, description text, date text, hour text);`;
