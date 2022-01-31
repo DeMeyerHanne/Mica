@@ -1,4 +1,4 @@
-import { deleteDatabase, enablePromise, openDatabase, SQLiteDatabase } from 'react-native-sqlite-storage';
+import { deleteDatabase, enablePromise, openDatabase, ResultSet, SQLiteDatabase } from 'react-native-sqlite-storage';
 import Appointment from '../models/appointment';
 
 
@@ -40,13 +40,14 @@ export const getAppointmentItems = async (db: SQLiteDatabase): Promise<Appointme
   }
 };
 
+
 export const saveAppointmentItems = async (db: SQLiteDatabase, appointmentItems: Appointment[]) => {
   const insertQuery =
-    `INSERT OR REPLACE INTO ${tableName}(rowid, title, description, date, hour) values` +
+    `INSERT OR REPLACE INTO ${tableName}(id, title, description, date, hour) values` +
     appointmentItems.map(i => `(${i.id}, '${i.title}', '${i.description}', '${i.date}', '${i.hour}')`).join(',');
-
   return db.executeSql(insertQuery);
 };
+
 
 export const deleteAppointmentItem = async (db: SQLiteDatabase, id: number) => {
   const deleteQuery = `DELETE from ${tableName} where rowid = ${id}`;

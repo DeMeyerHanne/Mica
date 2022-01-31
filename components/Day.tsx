@@ -11,7 +11,7 @@ import { createTable, deleteTable, getAppointmentItems, getDBConnection, saveApp
 
 
 const Header = () => {
-  const [ appointment, setAppointment ] = useState<Appointment[]>([]);
+  const [ appointments, setAppointments ] = useState<Appointment[]>([]);
   
   const getAppointments = async () => {
     try {
@@ -24,7 +24,7 @@ const Header = () => {
       console.log('Data in db: ', storedAppointmentItems);
 
       if (storedAppointmentItems.length ) {
-        setAppointment(storedAppointmentItems);
+        setAppointments(storedAppointmentItems);
         console.log('Set appointment');
       }
       //else {
@@ -49,7 +49,7 @@ const Header = () => {
 
       <ScrollView>
         {/* Loop */}
-        { appointment.map((a: Appointment) => (
+        { appointments.map((a: Appointment) => (
           <View style={[ scheduleApp.layout ]}>
             <Text style={[ text.extraSmall, scheduleApp.hour ]}>
               { a.hour }

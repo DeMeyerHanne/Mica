@@ -6,7 +6,6 @@ import Tts from 'react-native-tts';
 import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
 import Bubble from '../components/MessageBubble';
 import { createTable, getDBConnection, saveAppointmentItems } from '../utils/db';
 import Appointment from '../models/appointment';
@@ -58,74 +57,119 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   };
 
   const onSpeechResultsHandler = (e: any) => {
+    const nieuw = 'nieuw';
+    const nieuweAfspraak = 'nieuwe afspraak';
+    const meeting = 'meeting'
+
+    const overloop = 'overloop';
+    const opAgenda = 'agenda';
+
+    const datum = '8 september';
+
     const text = e.value[0];
     setResult(text);
-    console.log('Ingesproken tekst: ', text);
-
-    if (text == 'Hey Mica voeg een nieuwe afspraak toe' || text == 'Hey Mika voeg een nieuwe afspraak toe') {
+    // console.log('Ingesproken tekst: ', text)
+  
+    if (text.includes('nieuw')) {
       handleVoice('Op welke datum?');
-      setAnswer('Op welke datum?');
+      setAnswer('Op welke datum?')
+    } else if (text.includes('januari') || text.includes('februari') || text.includes('maart') || text.includes('april') || text.includes('mei') || text.includes('juni') || text.includes('juli') || text.includes('augustus') || text.includes('september') || text.includes('oktober') || text.includes('november') || text.includes('december')) {
+      handleVoice('Om hoe laat?')
+      setAnswer('Om hoe laat?')
+    } else if (text.includes('uur')) {
+      handleVoice('Wat wil je inplannen?')
+      setAnswer('Wat wil je inplannen?')
+    } else if (text == 'werken aan het project') {
+      handleVoice('Wil je nog details toevoegen?');
+      setAnswer('Wil je nog details toevoegen?')
     }
-    else if (text == 'Hey Mica plan een nieuwe afspraak' || text == 'Hey Mika plan een nieuwe afspraak') {
-      handleVoice('Op welke datum?');
-      setAnswer('Op welke datum?');
-    }
-    else if (text == 'Hey Mica Ik wil een nieuwe afspraak toevoegen aan mijn agenda' || text == 'Hey Mika Ik wil een nieuwe afspraak toevoegen aan mijn agenda') {
-      handleVoice('Op welke datum?');
-      setAnswer('Op welke datum?');
-    }
-    else if (text == '12 februari 2022') {
-      setAppointment((oldAppointment: Appointment) => {
-        oldAppointment.date = text;
-        return { ...oldAppointment };
-      });
-      handleVoice('Om hoe laat');
-      setAnswer('Om hoe laat?');
-    } 
-    else if (text == 'om 12 uur') {
-      setAppointment((oldAppointment: Appointment) => {
-        oldAppointment.hour = text;
-        return { ...oldAppointment };
-      });
-      handleVoice('Wat wil je plannen');
-      setAnswer('Wat wil je plannen?');
-    } 
-    else if (text == 'brunch met Britt') {
-      setAppointment((oldAppointment: Appointment) => {
-        oldAppointment.title = text;
-        return { ...oldAppointment };
-      });
-      handleVoice('Wil je extra informatie toevoegen?');
-      setAnswer('Wil je extra informatie toevoegen?');
-    } 
-    else if (text == 'nee') {
-      setAppointment((oldAppointment: Appointment) => {
-        oldAppointment.description = '';
-        return { ...oldAppointment };
-      });
-      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
-      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+  }
 
-      postAppointment(appointment)
-    } 
-    else if (text == 'ja') {
-      handleVoice('Wat wil je er nog aan toevoegen?');
-      setAnswer('Wat wil je er nog aan toevoegen?');
-    } else if (text == 'voor haar verjaardag') {
-      setAppointment((oldAppointment: Appointment) => {
-        oldAppointment.description = text;
-        return { ...oldAppointment }
-      });
-      handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
-      setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+  const Test = () => {
+    const str = 'foo';
+    const sstr = 'oo';
 
-      postAppointment(appointment)
-    } 
-    else {
-      handleVoice('Sorry, dat heb ik niet verstaan.')
-      setAnswer('Sorry, dat heb ik niet verstaan.')
-    }
-  };
+    console.log('String: ', str.includes(sstr))
+  }
+
+  useEffect(()=>{
+    Test()
+  },[])
+
+  // const onSpeechResultsHandler = (e: any) => {
+  //   const text = e.value[0];
+  //   setResult(text);
+  //   console.log('Ingesproken tekst: ', text);
+
+    // if (text == 'Hey Mica voeg een nieuwe afspraak toe' || text == 'Hey Mika voeg een nieuwe afspraak toe' || text == 'Plan een nieuwe afspraak' ||  text == 'Plan een nieuwe afspraak' text == 'Voeg een meeting toe' || text == 'Voeg een meeting toe') {
+    //   handleVoice('Op welke datum?');
+    //   setAnswer('Op welke datum?');
+    // }
+
+    // if (text == 'Hey Mica voeg een nieuwe afspraak toe' || text == 'Hey Mika voeg een nieuwe afspraak toe') {
+    //   handleVoice('Op welke datum?');
+    //   setAnswer('Op welke datum?');
+    // }
+    // else if (text == 'Hey Mica plan een nieuwe afspraak' || text == 'Hey Mika plan een nieuwe afspraak') {
+    //   handleVoice('Op welke datum?');
+    //   setAnswer('Op welke datum?');
+    // }
+    // else if (text == 'Hey Mica Ik wil een nieuwe afspraak toevoegen aan mijn agenda' || text == 'Hey Mika Ik wil een nieuwe afspraak toevoegen aan mijn agenda') {
+    //   handleVoice('Op welke datum?');
+    //   setAnswer('Op welke datum?');
+    // }
+    // else if (text == '12 februari 2022') {
+    //   setAppointment((oldAppointment: Appointment) => {
+    //     oldAppointment.date = text;
+    //     return { ...oldAppointment };
+    //   });
+    //   handleVoice('Om hoe laat');
+    //   setAnswer('Om hoe laat?');
+    // } 
+    // else if (text == 'om 12 uur') {
+    //   setAppointment((oldAppointment: Appointment) => {
+    //     oldAppointment.hour = text;
+    //     return { ...oldAppointment };
+    //   });
+    //   handleVoice('Wat wil je plannen');
+    //   setAnswer('Wat wil je plannen?');
+    // } 
+    // else if (text == 'brunch met Britt') {
+    //   setAppointment((oldAppointment: Appointment) => {
+    //     oldAppointment.title = text;
+    //     return { ...oldAppointment };
+    //   });
+    //   handleVoice('Wil je extra informatie toevoegen?');
+    //   setAnswer('Wil je extra informatie toevoegen?');
+    // } 
+    // else if (text == 'nee') {
+    //   setAppointment((oldAppointment: Appointment) => {
+    //     oldAppointment.description = '';
+    //     return { ...oldAppointment };
+    //   });
+    //   handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
+    //   setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+
+    //   postAppointment(appointment)
+    // } 
+    // else if (text == 'ja') {
+    //   handleVoice('Wat wil je er nog aan toevoegen?');
+    //   setAnswer('Wat wil je er nog aan toevoegen?');
+    // } else if (text == 'voor haar verjaardag') {
+    //   setAppointment((oldAppointment: Appointment) => {
+    //     oldAppointment.description = text;
+    //     return { ...oldAppointment }
+    //   });
+    //   handleVoice('Oke, ik voeg deze afspraak toe aan je agenda');
+    //   setAnswer('Oke, ik voeg deze afspraak toe aan je agenda.');
+
+    //   postAppointment(appointment)
+    // } 
+    // else {
+    //   handleVoice('Sorry, dat heb ik niet verstaan.')
+    //   setAnswer('Sorry, dat heb ik niet verstaan.')
+    // }
+  // };
 
   const startRecording = async () => {
     try {
@@ -170,7 +214,7 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
           <Image source={require('../assets/icons/Left.png')}/>
         </TouchableOpacity>
 
-        <Text style={[ styles.headerText, { paddingRight: 24, } ]}>Hey Mica</Text>
+        <Text style={[ styles.headerText, { paddingRight: 24, } ]}>Hey Mica!</Text>
 
         <View></View>
       </View>
