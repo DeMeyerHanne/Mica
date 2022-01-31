@@ -1,3 +1,5 @@
+import LottieView from 'lottie-react-native';
+
 import React, {useState, useEffect} from 'react';
 import { Animated, Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
@@ -157,9 +159,9 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
   },[])
 
   // APPLICATIE
-  return (    
+  return (   
     <View style={[ styles.container ]}>
-      <LinearGradient
+       <LinearGradient
         colors={['#D4E5FA', '#C9E5F1', '#DEDBFF']}
         style={[ styles.background, {width: Dimensions.get('screen').width, height: Dimensions.get('screen').height}]}
       />
@@ -195,13 +197,19 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
       <View style={{ flexDirection: 'row', justifyContent: 'center', bottom: 36, }}>
         <TouchableOpacity 
           onPress={startRecording}
-          style={{ marginLeft: 4, marginRight: 4 }}
+          style={{ marginLeft: 4, marginRight: 4, width: 72, height: 72 }}
         >
-          <Text 
+          {/* <Text 
             style={{ backgroundColor: '#3F3D56', color: '#FFF', borderRadius: 50, width: 64, height: 64, textAlignVertical: 'center', textAlign: 'center' }}
           >
             Mic
-          </Text>
+          </Text>  */}
+
+          <LottieView
+            source={require('../animations/mic.json')}
+            autoPlay={true}
+            loop={true}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity
