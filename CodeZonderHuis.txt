@@ -327,3 +327,54 @@ scrollview in voice.tsx
         >
           Hier komt mica zen tekst
         </Text>  
+
+
+
+
+
+        if (text.includes('nieuw')) {
+      handleVoice('Op welke datum?');
+      setAnswer('Op welke datum?')
+    } else if (text.includes('januari') || text.includes('februari') || text.includes('maart') || text.includes('april') || text.includes('mei') || text.includes('juni') || text.includes('juli') || text.includes('augustus') || text.includes('september') || text.includes('oktober') || text.includes('november') || text.includes('december')) {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.date = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Om hoe laat?')
+      setAnswer('Om hoe laat?')
+    } else if (text.includes('uur')) {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.hour = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Wat wil je inplannen?')
+      setAnswer('Wat wil je inplannen?')
+    } else if (text.includes('project') || text.includes('dokter') || text.includes('restaurant') || text.includes('muziekschool') || text.includes('uitstap')) {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.title = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Wil je nog details toevoegen?');
+      setAnswer('Wil je nog details toevoegen?');
+    } else if (text.includes('nee') || text.includes('niet nodig') || text.includes('overslaan')) {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.description = '';
+        return { ...oldAppointment };
+      });
+      handleVoice('Oke, de afspraak is toegevoegd aan je agenda.');
+      setAnswer('Oké, de afspraak is toegevoegd aan je agenda.')
+
+      // postAppointment(appointment);
+    } else if (text.includes('ja')) {
+      handleVoice('Welke details wil je toevoegen?');
+      setAnswer('Welke details wil je toevoegen?');
+    } else if (text.includes('documenten') || text.includes('knie') || text.includes('verjaardag') || text.includes('cello') || text.includes('klasconcert') || text.includes('neefje')) {
+      setAppointment((oldAppointment: Appointment) => {
+        oldAppointment.description = text;
+        return { ...oldAppointment };
+      });
+      handleVoice('Oke, de afspraak is toegevoegd aan je agenda.');
+      setAnswer('Oké, de afspraak is toegevoegd aan je agenda.');
+
+      // postAppointment(appointment);
+    }
