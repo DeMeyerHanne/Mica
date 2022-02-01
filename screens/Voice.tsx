@@ -90,7 +90,7 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
       });
       handleVoice('Wat wil je inplannen?')
       setAnswer('Wat wil je inplannen?')
-    } else if (text == 'werken aan het project') {
+    } else if (text.includes('project') || text.includes('dokter') || text.includes('restaurant') || text.includes('muziekschool') || text.includes('uitstap')) {
       setAppointment((oldAppointment: Appointment) => {
         oldAppointment.title = text;
         return { ...oldAppointment };
@@ -102,21 +102,22 @@ const VoiceApp = ( {navigation}: any, props: any, State: any ) => {
         oldAppointment.description = '';
         return { ...oldAppointment };
       });
-      handleVoice('Oke, de afspraak is toegevoegd.');
-      setAnswer('Oké, de afspraak is toegevoegd.')
-      postAppointment(appointment)
+      handleVoice('Oke, de afspraak is toegevoegd aan je agenda.');
+      setAnswer('Oké, de afspraak is toegevoegd aan je agenda.')
+
+      // postAppointment(appointment);
     } else if (text.includes('ja')) {
       handleVoice('Welke details wil je toevoegen?');
-      setAnswer('Welke details wil je nog toevoegen?');
-    } else if (text.includes('documenten')) {
+      setAnswer('Welke details wil je toevoegen?');
+    } else if (text.includes('documenten') || text.includes('knie') || text.includes('verjaardag') || text.includes('cello') || text.includes('klasconcert') || text.includes('neefje')) {
       setAppointment((oldAppointment: Appointment) => {
         oldAppointment.description = text;
         return { ...oldAppointment };
       });
-      handleVoice('Oke, de afspraak is toegevoegd.');
-      setAnswer('Oké, de afspraak is toegevoegd.');
+      handleVoice('Oke, de afspraak is toegevoegd aan je agenda.');
+      setAnswer('Oké, de afspraak is toegevoegd aan je agenda.');
 
-      postAppointment(appointment);
+      // postAppointment(appointment);
     }
 
 
