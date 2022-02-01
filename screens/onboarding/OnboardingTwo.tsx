@@ -1,7 +1,10 @@
+import LottieView from 'lottie-react-native';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
 import { text } from '../../styles/text';
+
 
 const OnboardingScreenTwo = ({navigation}: any) => {
   return (
@@ -11,13 +14,22 @@ const OnboardingScreenTwo = ({navigation}: any) => {
         style={[ styles.background , { width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }]}
       />
 
+      <TouchableOpacity
+        onPress={ () => { navigation.navigate('OnboardingOne')}}
+        style={{ marginTop: 16, marginLeft: 16 }}
+      >
+        <Image source={require('../../assets/icons/Left.png')}/>
+      </TouchableOpacity>
+
       <View style={[ card.background ]}>
-        <Image 
-          source={require('../../assets/onboarding/Onboarding2.png')}
+        <LottieView
+          source={require('../../animations/onboardingTwo.json')}
+          autoPlay={true}
+          loop={true}
         />
       </View>
 
-      <View style={{ alignItems: 'center', marginBottom: 48 }}>
+      <View style={{ alignItems: 'center', marginBottom: 40 }}>
         <Text style={[ text.largeBold ]}>
           Voeg een afspraak toe
         </Text>
@@ -27,7 +39,7 @@ const OnboardingScreenTwo = ({navigation}: any) => {
       </View>
 
 
-      <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 56, }]}>
+      <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 36, }]}>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#3F3D56' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
@@ -44,7 +56,7 @@ const OnboardingScreenTwo = ({navigation}: any) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('OnboardingThree')}
         >
-          <Text>Volgende</Text>
+          <Text style={{ color: '#3F3D56', fontSize: 16}}>Volgende</Text>
         </TouchableOpacity>
       </View>
     </View>

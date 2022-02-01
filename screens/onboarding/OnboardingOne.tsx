@@ -48,7 +48,7 @@ const OnboardingScreenOne = ({navigation}: any) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('OnboardingTwo')}
         >
-          <Text>Volgende</Text>
+          <Text style={{ color: '#3F3D56', fontSize: 16}}>Volgende</Text>
         </TouchableOpacity>
       </View>
     </View>

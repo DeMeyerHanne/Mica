@@ -1,7 +1,10 @@
+import LottieView from 'lottie-react-native';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
 import { text } from '../../styles/text';
+
 
 const OnboardingScreenThree = ({navigation}: any) => {
   return (
@@ -11,13 +14,22 @@ const OnboardingScreenThree = ({navigation}: any) => {
         style={[ styles.background , { width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }]}
       />
 
+      <TouchableOpacity
+        onPress={ () => { navigation.navigate('OnboardingTwo')}}
+        style={{ marginTop: 16, marginLeft: 16 }}
+      >
+        <Image source={require('../../assets/icons/Left.png')}/>
+      </TouchableOpacity>
+
       <View style={[ card.background ]}>
-        <Image 
-          source={require('../../assets/onboarding/Onboarding3.png')}
+        <LottieView
+          source={require('../../animations/OnboardingThree.json')}
+          autoPlay={true}
+          loop={true}
         />
       </View>
 
-      <View style={{ alignItems: 'center', marginBottom: 48 }}>
+      <View style={{ alignItems: 'center', marginBottom: 40 }}>
         <Text style={[ text.largeBold ]}>
           Overloop je dag
         </Text>
@@ -27,7 +39,7 @@ const OnboardingScreenThree = ({navigation}: any) => {
       </View>
 
 
-      <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 56, }]}>
+      <View style={[ { flexDirection: 'row', justifyContent: 'center', marginBottom: 36, }]}>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#959595' } ]}></View>
         <View style={[ steps.dot, { backgroundColor: '#3F3D56' } ]}></View>
@@ -44,7 +56,7 @@ const OnboardingScreenThree = ({navigation}: any) => {
         <TouchableOpacity
           onPress={() => navigation.push('Overview')}
         >
-          <Text>Klaar</Text>
+          <Text style={{ color: '#3F3D56', fontSize: 16}}>Klaar</Text>
         </TouchableOpacity>
       </View>
     </View>
