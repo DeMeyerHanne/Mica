@@ -35,7 +35,9 @@ const OnboardingScreenTwo = ({navigation}: any) => {
 
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'baseline' }}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Overview')}
+        >
           <Text>Skip</Text>
         </TouchableOpacity>
 

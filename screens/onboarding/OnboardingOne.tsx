@@ -1,6 +1,8 @@
+import LottieView from 'lottie-react-native';
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
 import { text } from '../../styles/text';
 
 const OnboardingScreenOne = ({navigation}: any) => {
@@ -12,8 +14,10 @@ const OnboardingScreenOne = ({navigation}: any) => {
       />
 
       <View style={[ card.background ]}>
-        <Image 
-          source={require('../../assets/onboarding/Onboarding1.png')}
+        <LottieView
+          source={require('../../animations/OnboardingOne.json')}
+          autoPlay={true}
+          loop={true}
         />
       </View>
 
@@ -35,7 +39,9 @@ const OnboardingScreenOne = ({navigation}: any) => {
 
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'baseline' }}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Overview')}
+        >
           <Text>Skip</Text>
         </TouchableOpacity>
 
